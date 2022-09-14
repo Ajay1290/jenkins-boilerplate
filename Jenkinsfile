@@ -13,6 +13,7 @@ pipeline {
                 echo 'Building..'
                 nodejs(NODEJS_ID){
                     bat "npm install"
+                    bat "npm i -g pm2"
                 }
             }
         }
@@ -25,7 +26,7 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 nodejs(NODEJS_ID){
-                    bat "npm run start"
+                    bat "pm2 start ./bin/www"
                 }
             }
         }
