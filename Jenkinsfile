@@ -1,15 +1,20 @@
 pipeline {
     agent any
 
+    environment {
+        NODEJS_ID = "NodeJS"
+    }
+
     tools {nodejs "NodeJS"}
 
     stages {
         stage('Build') {
             steps {
                 echo 'Building..'
-                nodejs('NodeJs'){
-                    npm -v
-                    node -v
+                nodejs(NODEJS_ID){
+                    execCmd "npm -v"
+                    execCmd "node -v"
+                    execCmd "yarn -v"
                 }
             }
         }
