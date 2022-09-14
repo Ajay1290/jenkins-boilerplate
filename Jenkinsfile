@@ -14,7 +14,6 @@ pipeline {
                 nodejs(NODEJS_ID){
                     bat "npm -v"
                     bat "node -v"
-                    bat "yarn -v"
                 }
             }
         }
@@ -27,6 +26,14 @@ pipeline {
             steps {
                 echo 'Deploying....'
             }
+        }
+    }
+    post {
+        failure {
+        echo 'Processing failed'
+        }
+        success {
+        echo 'Processing succeeded'
         }
     }
 }
