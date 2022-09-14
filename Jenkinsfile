@@ -12,9 +12,9 @@ pipeline {
             steps {
                 echo 'Building..'
                 nodejs(NODEJS_ID){
-                    sh "npm -v"
-                    sh "node -v"
-                    sh "yarn -v"
+                    bat "npm -v"
+                    bat "node -v"
+                    bat "yarn -v"
                 }
             }
         }
