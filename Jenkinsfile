@@ -12,8 +12,7 @@ pipeline {
             steps {
                 echo 'Building..'
                 nodejs(NODEJS_ID){
-                    bat "npm -v"
-                    bat "node -v"
+                    bat "npm install"
                 }
             }
         }
@@ -25,6 +24,9 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                nodejs(NODEJS_ID){
+                    bat "npm run start"
+                }
             }
         }
     }
