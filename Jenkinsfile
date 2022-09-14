@@ -7,7 +7,10 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh "node -v"
+                nodejs('NodeJs'){
+                    npm -v
+                    node -v
+                }
             }
         }
         stage('Test') {
