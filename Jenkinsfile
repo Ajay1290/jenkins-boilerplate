@@ -12,9 +12,9 @@ pipeline {
             steps {
                 echo 'Building..'
                 nodejs(NODEJS_ID){
-                    execCmd "npm -v"
-                    execCmd "node -v"
-                    execCmd "yarn -v"
+                    sh "npm -v"
+                    sh "node -v"
+                    sh "yarn -v"
                 }
             }
         }
