@@ -20,7 +20,8 @@ pipeline {
                 echo 'Cloning files from (branch: "' + branchName + '" )'
                 dir('build') {
                     git branch: branchName, credentialsId: 	gitCredentials, url: repoUrl
-                }     
+                }
+                sh "ls"
 
             }
         }
@@ -40,6 +41,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                sh "cd build"
                 nodejs(NODEJS_ID){
                     sh "pm2 restart ./bin/www"
                 }
