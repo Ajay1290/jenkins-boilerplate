@@ -1,14 +1,9 @@
-String branchName = env.BRANCH_NAME
+String branchName = 'main'
 String gitCredentials = "ajay1290"
 String repoUrl = 'https://github.com/Ajay1290/jenkins-boilerplate.git'
 
 pipeline {
     agent any
-
-    triggers {
-        githubPush()
-    }
-
 
     environment {
         NODEJS_ID = "NodeJS"
