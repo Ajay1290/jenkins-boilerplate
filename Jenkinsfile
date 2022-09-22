@@ -12,14 +12,6 @@ pipeline {
     tools {nodejs "NodeJS"}
 
     stages {
-        stage('Cleaning') {
-            steps {
-                echo 'Cleaning..'
-                nodejs(NODEJS_ID){
-                    sh "pm2 delete all"
-                }
-            }
-        }
         stage('Build') {
             steps {
                 echo 'Building..'
