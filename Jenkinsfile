@@ -28,7 +28,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                export BUILD_ID=dontKillMePlease
+                export BUILD_ID="dontKillMePlease"
                 nodejs(NODEJS_ID){
                     sh "npm install"
                 }
