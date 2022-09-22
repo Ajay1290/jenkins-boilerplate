@@ -1,7 +1,3 @@
-String branchName = 'main'
-String gitCredentials = "ajay1290"
-String repoUrl = 'https://github.com/Ajay1290/jenkins-boilerplate.git'
-
 pipeline {
     agent any
 
@@ -17,8 +13,8 @@ pipeline {
                 echo 'Cleaning..'
                 script {
                     try {
-                        sh 'pm2 delete all'
                         sh 'rm -rf ./node_modules'
+                        sh 'pm2 delete all'
                     } catch (Exception e) {
                         echo 'Exception occurred: ' + e.toString()
                     }
@@ -26,25 +22,31 @@ pipeline {
             }
         }
         stage('Build') {
+            echo 'Building..'
+            def node = tool name: 'NodeJS', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
+            env.PATH = "${node}/bin:${env.PATH}"
+            sh "node -v"
             steps {
-                echo 'Building..'
                 sh "export JENKINS_NODE_COOKIE=dontKillMe"
                 nodejs(NODEJS_ID){
                     sh "npm install"
                 }
             }
         }
+
+        stage('PM2 Install') {
+            echo 'Installing PM2 to run application as daemon...'
+            sh "npm install pm2 -g"
+        }
+
         stage('Test') {
             steps {
                 echo 'Testing..'
-                sh "pwd"
-                sh "ls"
             }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                sh "ls"
                 nodejs(NODEJS_ID){
                     sh "chmod +x ./scripts/deployment.sh"
                     sh "./scripts/deployment.sh"
@@ -55,10 +57,10 @@ pipeline {
     }
     post {
         failure {
-        echo 'Processing failed'
+            echo 'Processing failed'
         }
         success {
-        echo 'Processing succeeded'
+            echo 'Processing succeeded'
         }
     }
 }
