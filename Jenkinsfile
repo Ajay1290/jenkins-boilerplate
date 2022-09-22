@@ -1,6 +1,6 @@
-String branchName = 'main'
-String gitCredentials = "ajay1290"
-String repoUrl = 'https://github.com/Ajay1290/jenkins-boilerplate.git'
+// String branchName = 'main'
+// String gitCredentials = "ajay1290"
+// String repoUrl = 'https://github.com/Ajay1290/jenkins-boilerplate.git'
 
 pipeline {
     agent any
@@ -17,10 +17,10 @@ pipeline {
                 echo 'Make the output directory.'
                 sh 'mkdir -p build'
 
-                echo 'Cloning files from (branch: "' + branchName + '" )'
-                dir('build') {
-                    git branch: branchName, credentialsId: 	gitCredentials, url: repoUrl
-                }     
+                // echo 'Cloning files from (branch: "' + branchName + '" )'
+                // dir('build') {
+                //     git branch: branchName, credentialsId: 	gitCredentials, url: repoUrl
+                // }     
 
             }
         }
