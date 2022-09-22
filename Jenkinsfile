@@ -15,7 +15,7 @@ pipeline {
         stage('Cleaning') {
             steps {
                 echo 'Cleaning..'
-                node {
+                script {
                     try {
                         sh 'pm2 delete all'
                         sh 'rm -rf ./node_modules'
