@@ -46,6 +46,7 @@ pipeline {
                 echo 'Deploying....'
                 sh "ls"
                 nodejs(NODEJS_ID){
+                    sh "chmod +x ./scripts/deployment.sh"
                     sh "./scripts/deployment.sh"
                     sh "pm2 status"
                 }
