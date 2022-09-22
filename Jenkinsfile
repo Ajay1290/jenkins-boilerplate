@@ -22,11 +22,11 @@ pipeline {
             }
         }
         stage('Build') {
-            echo 'Building..'
-            def node = tool name: 'NodeJS', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
-            env.PATH = "${node}/bin:${env.PATH}"
-            sh "node -v"
             steps {
+                echo 'Building..'
+                def node = tool name: 'NodeJS', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
+                env.PATH = "${node}/bin:${env.PATH}"
+                sh "node -v"
                 sh "export JENKINS_NODE_COOKIE=dontKillMe"
                 nodejs(NODEJS_ID){
                     sh "npm install"
