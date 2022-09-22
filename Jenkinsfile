@@ -12,17 +12,12 @@ pipeline {
     tools {nodejs "NodeJS"}
 
     stages {
-        stage('Git') {
+        stage('Cleaning') {
             steps {
-                echo 'Make the output directory.'
-                sh 'mkdir -p build'
-
-                echo 'Cloning files from (branch: "' + branchName + '" )'
-                dir('build') {
-                    git branch: branchName, credentialsId: 	gitCredentials, url: repoUrl
+                echo 'Cleaning..'
+                nodejs(NODEJS_ID){
+                    sh "pm2 delete all"
                 }
-                sh "ls"
-
             }
         }
         stage('Build') {
@@ -36,14 +31,17 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
+                sh "pwd"
+                sh "ls"
             }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                sh "cd build"
+                sh "ls"
                 nodejs(NODEJS_ID){
-                    sh "pm2 restart ./bin/www"
+                    sh "pm2 start ./bin/www"
+                    sh "pm2 status"
                 }
             }
         }
