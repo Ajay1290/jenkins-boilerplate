@@ -12,9 +12,21 @@ pipeline {
     tools {nodejs "NodeJS"}
 
     stages {
+        stage('Cleaning') {
+            steps {
+                echo 'Cleaning..'
+                try {
+                    sh 'pm2 delete all'
+                    sh 'rm -rf ./node_modules'
+                } catch (Exception e) {
+                    echo 'Exception occurred: ' + e.toString()
+                }
+            }
+        }
         stage('Build') {
             steps {
                 echo 'Building..'
+                export BUILD_ID=dontKillMePlease
                 nodejs(NODEJS_ID){
                     sh "npm install"
                 }
