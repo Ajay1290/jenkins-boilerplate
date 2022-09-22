@@ -15,7 +15,7 @@ pipeline {
         stage('Cleaning') {
             steps {
                 echo 'Cleaning..'
-                nodejs(NODEJS_ID){
+                node {
                     try {
                         sh 'pm2 delete all'
                         sh 'rm -rf ./node_modules'
