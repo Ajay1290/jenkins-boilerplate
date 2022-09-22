@@ -15,11 +15,13 @@ pipeline {
         stage('Cleaning') {
             steps {
                 echo 'Cleaning..'
-                try {
-                    sh 'pm2 delete all'
-                    sh 'rm -rf ./node_modules'
-                } catch (Exception e) {
-                    echo 'Exception occurred: ' + e.toString()
+                nodejs(NODEJS_ID){
+                    try {
+                        sh 'pm2 delete all'
+                        sh 'rm -rf ./node_modules'
+                    } catch (Exception e) {
+                        echo 'Exception occurred: ' + e.toString()
+                    }
                 }
             }
         }
