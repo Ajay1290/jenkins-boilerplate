@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Git') {
             steps {
-                echo 'Make the output directory'
+                echo 'Make the output directory.'
                 sh 'mkdir -p build'
 
                 echo 'Cloning files from (branch: "' + branchName + '" )'
