@@ -1,3 +1,7 @@
+String branchName = env.BRANCH_NAME
+String gitCredentials = "ajay1290"
+String repoUrl = 'https://github.com/Ajay1290/jenkins-boilerplate.git'
+
 pipeline {
     agent any
 
@@ -10,7 +14,14 @@ pipeline {
     stages {
         stage('Git') {
             steps {
-                git 'https://github.com/Ajay1290/jenkins-boilerplate'
+                echo 'Make the output directory'
+                sh 'mkdir -p build'
+
+                echo 'Cloning files from (branch: "' + branchName + '" )'
+                dir('build') {
+                    git branch: branchName, credentialsId: 	gitCredentials, url: repoUrl
+                }     
+
             }
         }
         stage('Build') {
