@@ -5,6 +5,11 @@ String repoUrl = 'https://github.com/Ajay1290/jenkins-boilerplate.git'
 pipeline {
     agent any
 
+    triggers {
+        githubPush()
+    }
+
+
     environment {
         NODEJS_ID = "NodeJS"
     }
