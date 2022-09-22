@@ -11,10 +11,9 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                git clone ""
+
                 nodejs(NODEJS_ID){
                     sh "npm install"
-                    sh "npm i -g pm2"
                 }
             }
         }
@@ -27,7 +26,7 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 nodejs(NODEJS_ID){
-                    sh "pm2 start ./bin/www"
+                    sh "pm2 restart ./bin/www"
                 }
             }
         }
