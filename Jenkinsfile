@@ -14,14 +14,6 @@ pipeline {
                 sh "npm -v"
                 sh 'export PM2_HOME="/home/ec2-user/.pm2"'
                 sh 'whoami'
-                // script {
-                //     try {
-                //         sh 'rm -rf ./node_modules'
-                //         sh 'pm2 delete all'
-                //     } catch (Exception e) {
-                //         echo 'Exception occurred: ' + e.toString()
-                //     }
-                // }
             }
         }
         stage('Build') {
@@ -40,7 +32,14 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                sh "pm2 start ./bin/www"
+                script {
+                    try {
+                        sh "pm2 restart ./bin/www"
+                    } catch (Exception e) {
+                        echo 'Exception occurred: ' + e.toString()
+                        sh "pm2 start ./bin/www"
+                    }
+                }
                 sh "pm2 status"
                 // nodejs(NODEJS_ID){
                 //     sh "chmod +x ./scripts/deployment.sh"
