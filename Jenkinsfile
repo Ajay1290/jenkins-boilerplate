@@ -11,6 +11,7 @@ pipeline {
                 echo 'Cleaning..'
                 sh "node -v"
                 sh "npm -v"
+                sh 'export PM2_HOME="/home/ec2-user/.pm2"'
                 // script {
                 //     try {
                 //         sh 'rm -rf ./node_modules'
