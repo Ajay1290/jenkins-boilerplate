@@ -1,6 +1,3 @@
-def node = tool name: 'NodeJS', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
-env.PATH = "${node}/bin:${env.PATH}"
-
 pipeline {
     agent any
 
@@ -14,31 +11,31 @@ pipeline {
         stage('Cleaning') {
             steps {
                 echo 'Cleaning..'
-                script {
-                    try {
-                        sh 'rm -rf ./node_modules'
-                        sh 'pm2 delete all'
-                    } catch (Exception e) {
-                        echo 'Exception occurred: ' + e.toString()
-                    }
-                }
+                // script {
+                //     try {
+                //         sh 'rm -rf ./node_modules'
+                //         sh 'pm2 delete all'
+                //     } catch (Exception e) {
+                //         echo 'Exception occurred: ' + e.toString()
+                //     }
+                // }
             }
         }
         stage('Build') {
             steps {
-                echo 'Building..'
+                // echo 'Building..'
                 sh "node -v"
-                sh "export JENKINS_NODE_COOKIE=dontKillMe"
+                // sh "export JENKINS_NODE_COOKIE=dontKillMe"
                 nodejs(NODEJS_ID){
-                    sh "npm install"
+                    sh "node -v"
                 }
             }
         }
 
         stage('PM2 Install') {
             steps {
-                echo 'Installing PM2 to run application as daemon...'
-                sh "npm install pm2 -g"
+                // echo 'Installing PM2 to run application as daemon...'
+                // sh "npm install pm2 -g"
             }
         }
 
@@ -50,11 +47,11 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                nodejs(NODEJS_ID){
-                    sh "chmod +x ./scripts/deployment.sh"
-                    sh "./scripts/deployment.sh"
-                    sh "pm2 status"
-                }
+                // nodejs(NODEJS_ID){
+                //     sh "chmod +x ./scripts/deployment.sh"
+                //     sh "./scripts/deployment.sh"
+                //     sh "pm2 status"
+                // }
             }
         }
     }
