@@ -10,6 +10,7 @@ pipeline {
             steps {
                 echo 'Cleaning..'
                 sh "node -v"
+                sh 'whereis node'
                 sh "npm -v"
                 sh 'export PM2_HOME="/home/ec2-user/.pm2"'
                 // script {
@@ -24,7 +25,8 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh "pm2 status"
+                sh 'export PM2_HOME="/home/ec2-user/.pm2"'
+                sh "export PM2_HOME='/home/ec2-user/.pm2' && pm2 status"
                 // echo 'Building..'
                 // sh "export JENKINS_NODE_COOKIE=dontKillMe"
             }
