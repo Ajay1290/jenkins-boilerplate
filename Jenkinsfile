@@ -13,6 +13,7 @@ pipeline {
                 sh 'whereis node'
                 sh "npm -v"
                 sh 'export PM2_HOME="/home/ec2-user/.pm2"'
+                sh 'whoami'
                 // script {
                 //     try {
                 //         sh 'rm -rf ./node_modules'
