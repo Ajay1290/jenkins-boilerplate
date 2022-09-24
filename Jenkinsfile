@@ -27,7 +27,7 @@ pipeline {
                 sh "node -v"
                 // sh "export JENKINS_NODE_COOKIE=dontKillMe"
                 nodejs(NODEJS_ID){
-                    sh "node -v"
+                    sh "node -v "
                 }
             }
         }
