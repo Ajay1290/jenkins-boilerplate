@@ -34,7 +34,7 @@ pipeline {
 
         stage('PM2 Install') {
             steps {
-                // echo 'Installing PM2 to run application as daemon...'
+                echo 'Installing PM2 to run application as daemon...'
                 // sh "npm install pm2 -g"
             }
         }
