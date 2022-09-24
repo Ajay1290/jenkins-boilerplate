@@ -26,17 +26,9 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'ls -l /home/ec2-user/.pm2'
-                sh "export PM2_HOME='/home/ec2-user/.pm2' && pm2 status"
+                sh "pm2 status"
                 // echo 'Building..'
                 // sh "export JENKINS_NODE_COOKIE=dontKillMe"
-            }
-        }
-
-        stage('PM2 Install') {
-            steps {
-                echo 'Installing PM2 to run application as daemon...'
-                // sh "npm install pm2 -g"
             }
         }
 
@@ -48,9 +40,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                sh "pm2 start ./bin/www"
+                sh "pm2 status"
                 // nodejs(NODEJS_ID){
                 //     sh "chmod +x ./scripts/deployment.sh"
-                //     sh "./scripts/deployment.sh"
                 //     sh "pm2 status"
                 // }
             }
