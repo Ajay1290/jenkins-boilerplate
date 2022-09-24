@@ -5,8 +5,6 @@ pipeline {
         NODEJS_ID = "NodeJS"
     }
 
-    tools {nodejs "NodeJS"}
-
     stages {
         stage('Cleaning') {
             steps {
@@ -26,9 +24,6 @@ pipeline {
                 // echo 'Building..'
                 sh "node -v"
                 // sh "export JENKINS_NODE_COOKIE=dontKillMe"
-                nodejs(NODEJS_ID){
-                    sh "node -v "
-                }
             }
         }
 
