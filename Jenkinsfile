@@ -11,7 +11,6 @@ pipeline {
                 echo 'Cleaning..'
                 sh "node -v"
                 sh "npm -v"
-                sh "pm2 status"
                 // script {
                 //     try {
                 //         sh 'rm -rf ./node_modules'
@@ -24,6 +23,7 @@ pipeline {
         }
         stage('Build') {
             steps {
+                sh "pm2 status"
                 // echo 'Building..'
                 // sh "export JENKINS_NODE_COOKIE=dontKillMe"
             }
