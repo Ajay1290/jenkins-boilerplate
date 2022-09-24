@@ -26,7 +26,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'export PM2_HOME="/home/ec2-user/.pm2"'
+                sh 'ls -l /home/ec2-user/.pm2'
                 sh "export PM2_HOME='/home/ec2-user/.pm2' && pm2 status"
                 // echo 'Building..'
                 // sh "export JENKINS_NODE_COOKIE=dontKillMe"
